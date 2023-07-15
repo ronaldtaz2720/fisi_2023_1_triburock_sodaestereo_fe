@@ -12,9 +12,7 @@ const DoctorScreen = ({route}) => {
       <View>
         <Text style={styles.titulo}>Nuestra especialidad</Text>
         <Text style={styles.texto}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a 
-          galley of type and scrambled it to make a type specimen book.
+        La dermatología es una especialidad de la medicina que se ocupa del conocimiento y estudio de la piel humana y de las enfermedades que la afectan. Esta especialidad también se preocupa de la prevención de las enfermedades y de la preservación o la recuperación de la normalidad cutánea así como de la dermocosmética que se dedica a la higiene, a la apariencia y protección de la piel.
         </Text>
       </View>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
