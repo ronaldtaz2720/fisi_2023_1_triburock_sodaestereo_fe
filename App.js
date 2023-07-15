@@ -6,7 +6,8 @@ import HomeScreen from './Screens/HomeScreen';
 import ReservarCita from './Screens/ReservarCita';
 import ListaDoctoresScreen from './Screens/ListaDoctoresScreen';
 import EspecialidadScreen from './Screens/EspecialidadScreen';
-import DoctorScreen from './Screens/DoctorScreen'
+import DoctorScreen from './Screens/DoctorScreen';
+import PagoScreen from './Screens/PagoScreen';
 
 const Stack = createStackNavigator()
 
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name="Doctores" component={ListaDoctoresScreen} options={{headerOptions}}/>
         <Stack.Screen name="Especialidades" component={EspecialidadScreen} options={{headerOptions}}/>
         <Stack.Screen name="Doctor" component={DoctorScreen} options={{headerOptions}}/>
+        <Stack.Screen name="Pago" component={PagoScreen} options={{headerOptions}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

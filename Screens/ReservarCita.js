@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { doctoresData, especialidades } from '../data';
 import PasosCita from '../Components/PasosCita';
+
 
 const ReservarCita = ({navigation}) => {
   const [selectedEspecialidad, setSelectedEspecialidad] = useState(null);
@@ -184,7 +185,6 @@ const ReservarCita = ({navigation}) => {
                 </View>
               </View>
               
-
               <View style={{ marginBottom: 30 }}>
                 <Text style={styles.label}>Doctores</Text>
                 <View style={styles.pickerContainer}>
@@ -206,8 +206,8 @@ const ReservarCita = ({navigation}) => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.btnContinuar}>
-                <Text style={{fontSize: 15, fontWeight: 'bold', color: '#fff'}}>Confirmar</Text>
+              <TouchableOpacity style={styles.btnContinuar} onPress={()=>navigation.navigate('Pago')}>
+                <Text style={{fontSize: 15, fontWeight: 'bold', color: '#000'}}>Confirmar</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
     backgroundColor: '#fff'
   },
   label: {
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     marginBottom: 30
-  }
+  },
 });
 
 export default ReservarCita;
