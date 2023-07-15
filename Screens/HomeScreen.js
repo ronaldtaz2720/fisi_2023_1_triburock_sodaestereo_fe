@@ -71,7 +71,7 @@ const HomeScreen = ({navigation}) => {
           />
       </View>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity style={styles.btnAgendar} onPress={()=>navigation.navigate('Reservar Cita')}>
+        <TouchableOpacity style={styles.btnAgendar} onPress={()=>navigation.navigate('Agenda tu cita')}>
           <Text style={{fontWeight: 'bold', fontSize: 20}}>
             Agendar Cita
           </Text>
