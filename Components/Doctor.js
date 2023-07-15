@@ -24,8 +24,8 @@ const Doctor = ({item, navigation}) => {
 
 const styles = StyleSheet.create({
     imagenDoctores:{
-      width: 120,
-      height: 120,
+      width: 125,
+      height: 125,
       borderRadius: 15,
       marginRight: 20,
     },
