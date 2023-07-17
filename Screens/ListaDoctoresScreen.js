@@ -1,9 +1,11 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
-import React from 'react'
-import {doctoresData} from '../data'
+import React, {useContext} from 'react'
 import Doctor from '../Components/Doctor'
+import { MyContext } from '../MyContext';
 
 const DoctorScreen = ({navigation}) => {
+
+  const { doctores } = useContext(MyContext);
 
   const renderDoctores = ({item}) => {
     return(
@@ -15,9 +17,9 @@ const DoctorScreen = ({navigation}) => {
     <View style={styles.container}>
       <View style={{flexDirection: 'row'}}>
       <FlatList
-            data={doctoresData}
+            data={doctores}
             renderItem={renderDoctores}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.idMedico}
           />
       </View>
     </View>

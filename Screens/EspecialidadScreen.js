@@ -1,28 +1,26 @@
-import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import {especialidades} from '../data'
+import Especialidad from '../Components/Especialidad'
 
-const DoctorScreen = () => {
+const EspecialidadScreen = ({navigation, route}) => {
 
-  const renderDoctores = ({item}) => (
-    <View>
-      <TouchableOpacity onPress={()=>alert('clicked')}>
-          <View style={styles.lista}>
-            <Image source={item.imagen} style={styles.imagenDoctores} resizeMode="contain"/>
-            <Text style={{fontSize: 15, textAlign: 'center', maxWidth: 120, fontWeight:'bold'}}>{item.nombre}</Text>
-          </View>
-      </TouchableOpacity>
-    </View>
-);
+  const {item} = route.params
 
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: 'row'}}>
-      <FlatList
-            data={especialidades}
-            renderItem={renderDoctores}
-            keyExtractor={(item) => item.id}
-          />
+      <Especialidad item={item} navigation={navigation}/>
+      <View>
+        <Text style={styles.titulo}>{item.nombreespecialidad}</Text>
+        <Text style={styles.texto}>
+            {item.descriespecialidad}
+        </Text>
+      </View>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <TouchableOpacity style={styles.btnAgendar} onPress={()=>navigation.navigate('Agenda tu cita')}>
+          <Text style={{fontWeight: 'bold', fontSize: 18}}>
+            Agendar Cita
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -30,24 +28,31 @@ const DoctorScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f5f5f5'
+    padding: 30,
   },
-  imagenDoctores:{
+  titulo: {
+    fontSize: 20,
+    color: '#1512a4',
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 15
+  },
+  texto: {
+    color: '#3c3c43'
+  },
+  btnAgendar: {
+    marginVertical: 60,
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 15,
+    alignItems: 'center',
     width: 150,
-    height: 150,
-    borderRadius: 15,
-    marginRight: 20,
   },
-  lista:{
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderRadius: 15,
-    marginBottom: 20,
-    backgroundColor: '#ededed',
-    borderColor: '#aaa'
-  }
+  imagenDoctores: {
+    width: '70%',
+    height: 150,
+    borderRadius: 15
+  },
 })
 
-export default DoctorScreen
+export default EspecialidadScreen

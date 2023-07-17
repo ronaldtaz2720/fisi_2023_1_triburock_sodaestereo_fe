@@ -1,17 +1,14 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Doctor = ({item, navigation}) => {
+const Especialidad = ({item, navigation}) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={()=>navigation.navigate('Doctor', {item:item})}>
+      <TouchableOpacity onPress={()=>navigation.navigate('Especialidad', {item:item})}>
           <View style={styles.lista}>
-            <Image source={item.imagenDoctor} style={styles.imagenDoctores} resizeMode="contain"/>
-            <View >
-              <Text style={styles.nombreDoctor}>{item.nombre}</Text>
-              <Text>{item.nombreEspecialidad}</Text>
-            </View>
+            <Image source={{uri: item.urlImagen}} style={styles.imagenDoctores} />
+            <Text style={styles.nombreDoctor}>{item.nombreespecialidad}</Text>
           </View>
       </TouchableOpacity>
     </View>
@@ -20,13 +17,12 @@ const Doctor = ({item, navigation}) => {
 
 const styles = StyleSheet.create({
     imagenDoctores:{
-      width: 125,
+      width: '100%',
       height: 125,
       borderRadius: 15,
       marginRight: 20,
     },
     lista:{
-      flexDirection: 'row',
       borderWidth: 1,
       borderRadius: 15,
       marginBottom: 20,
@@ -36,9 +32,9 @@ const styles = StyleSheet.create({
     },
     nombreDoctor: {
       fontSize: 18,  
-      maxWidth: 120, 
+      maxWidth: 180, 
       fontWeight:'bold', 
     }
   })
 
-export default Doctor
+export default Especialidad

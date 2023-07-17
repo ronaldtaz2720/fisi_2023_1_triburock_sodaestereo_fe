@@ -72,6 +72,11 @@ const PagoScreen = ({navigation}) => {
         />
       </View>
       <View style={{alignItems: 'center'}}>
+        <TouchableOpacity style={styles.btnPagar} >
+            <Text style={styles.pagar}>xd</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{alignItems: 'center'}}>
         <TouchableOpacity style={styles.btnPagar} onPress={handlePagar}>
             <Text style={styles.pagar}>Pagar</Text>
         </TouchableOpacity>

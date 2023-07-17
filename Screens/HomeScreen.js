@@ -1,17 +1,21 @@
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
-import React from 'react'
+import React, {useContext} from 'react'
 import Arrow from 'react-native-vector-icons/SimpleLineIcons';
-import {doctoresData, especialidades} from '../data'
+//import {doctoresData, especialidades} from '../data'
+import Icon from 'react-native-vector-icons/AntDesign';
+import { MyContext } from '../MyContext';
 
 import logo from '../assets/logo.png'
 import user from '../assets/user.png'
 
 const HomeScreen = ({navigation}) => {
 
+  const { especialidades, doctores } = useContext(MyContext);
+
   const renderDoctores = ({item}) => (
       <View>
         <TouchableOpacity onPress={()=>navigation.navigate('Doctor', {item:item})}>
-            <Image source={item.imagen} style={styles.imagenDoctores} resizeMode="contain"/>
+            <Image source={{uri: item.imagenDoctor}} style={styles.imagenDoctores} resizeMode="contain"/>
             <Text style={{fontSize: 15, textAlign: 'center', maxWidth: 120}}>{item.nombre}</Text>
         </TouchableOpacity>
       </View>
@@ -19,9 +23,9 @@ const HomeScreen = ({navigation}) => {
 
   const renderEspecialidades = ({item}) => (
     <View>
-      <TouchableOpacity onPress={()=>alert('clicked')}>
-          <Image source={item.imagen} style={styles.imagenDoctores} />
-          <Text style={{fontSize: 15, textAlign: 'center', maxWidth: 120}}>{item.nombre}</Text>
+      <TouchableOpacity onPress={()=>navigation.navigate('Especialidad', {item:item})}>
+          <Image source={{uri: item.urlImagen}} style={styles.imagenDoctores} />
+          <Text style={{fontSize: 15, textAlign: 'center', maxWidth: 120}}>{item.nombreespecialidad}</Text>
       </TouchableOpacity>
     </View>
 );
@@ -35,6 +39,9 @@ const HomeScreen = ({navigation}) => {
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 20, gap: 20}}>
         <Image source={user} style={styles.imagenUsuario}/>
         <Text style={{backgroundColor: '#ddd', borderRadius: 15, padding: 10}}>Julia Mediana Perez</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate('Citas')}>
+          <Icon name="book" size={30} color="#000" />
+        </TouchableOpacity>
       </View>
       <View style={styles.scrollcontainer}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
@@ -47,10 +54,10 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <FlatList
-            data={doctoresData}
+            data={doctores}
             horizontal={true}
             renderItem={renderDoctores}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.idMedico}
           />
       </View>
       <View style={styles.scrollcontainer}>
@@ -67,7 +74,7 @@ const HomeScreen = ({navigation}) => {
             data={especialidades}
             horizontal={true}
             renderItem={renderEspecialidades}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.idespecialidad}
           />
       </View>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -93,6 +100,8 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 15,
     marginRight: 20,
+    borderColor: '#fff',
+    borderWidth: 1,
   },
   texto: {
     fontSize: 30,

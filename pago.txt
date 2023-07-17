@@ -1,0 +1,101 @@
+import { View, Text, Image, StyleSheet, Linking  } from 'react-native'
+import React, {useState} from 'react'
+import logo from '../assets/logo-mercado-pago.webp'
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import { Alert } from 'react-native';
+
+const PagoScreen = ({navigation}) => {
+
+  const handlePagar = async () => {
+    const apiUrl = 'http://192.168.100.10:3100/ux-administracion-presupuesto/appcodigo/servicio-al-cliente/v1/pagar';
+
+    const payload = {
+      titulo: 'Título del artículo',
+      precio: 50.00,
+      idUsuario: 1,
+      fechaAgenda: '2023-07-14',
+      horaAgenda: '09:00:00',
+      fechaHoraPago: '2023-07-14T09:00:00',
+      idMedico: 1,
+      idEspecialidad: 1,
+      idClinica: 1,
+      idTiempoDisponible: 1
+    };
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        // La solicitud se realizó correctamente
+        const data = await response.json();
+        // Obtener la URL de redirección
+        const link = data.link;
+        // Redireccionar al usuario
+        Linking.openURL(link);
+      } else {
+        // La solicitud falló
+        console.error('Error al realizar el pago:', response.status);
+        // Aquí puedes manejar el error de acuerdo a tus necesidades
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+      // Aquí puedes manejar el error de acuerdo a tus necesidades
+    }
+  };
+
+
+  return (
+    <View style={styles.container}>
+      <View style={{alignItems: 'center'}}>
+        <TouchableOpacity style={styles.btnPagar} onPress={handlePagar}>
+            <Text style={styles.pagar}>Pagar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 30
+    },
+    imagen: {
+        width: 350,
+        height: 90,
+    },
+    texto: {
+        fontSize: 20,
+        marginVertical: 20,
+        color: '#1512a4',
+        fontWeight: 'bold'
+    },
+    input: {
+        width: 200,
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        marginBottom: 10,
+        paddingHorizontal: 10,
+    },
+    btnPagar: {
+        backgroundColor: '#1512a4',
+        width: 200,
+        padding: 10,
+        borderRadius: 15
+    },
+    pagar: {
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold'
+    }
+})
+
+export default PagoScreen

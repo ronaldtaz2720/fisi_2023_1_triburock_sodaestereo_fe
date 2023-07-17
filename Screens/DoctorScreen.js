@@ -1,10 +1,20 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useContext} from 'react'
 import Doctor from '../Components/Doctor'
+import { MyContext } from '../MyContext';
 
-const DoctorScreen = ({route}) => {
+const DoctorScreen = ({navigation, route}) => {
 
   const {item} = route.params
+  const { especialidades } = useContext(MyContext);
+
+  const especialidad = especialidades.find(
+    (especialidad) => especialidad.idespecialidad === item.idEspecialidad
+  );
+
+  const descripcionEspecialidad = especialidad
+    ? especialidad.descriespecialidad
+    : '';
 
   return (
     <View style={styles.container}>
@@ -12,11 +22,11 @@ const DoctorScreen = ({route}) => {
       <View>
         <Text style={styles.titulo}>Nuestra especialidad</Text>
         <Text style={styles.texto}>
-        La dermatología es una especialidad de la medicina que se ocupa del conocimiento y estudio de la piel humana y de las enfermedades que la afectan. Esta especialidad también se preocupa de la prevención de las enfermedades y de la preservación o la recuperación de la normalidad cutánea así como de la dermocosmética que se dedica a la higiene, a la apariencia y protección de la piel.
+          {descripcionEspecialidad}
         </Text>
       </View>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity style={styles.btnAgendar} onPress={()=>navigation.navigate('Reservar Cita')}>
+        <TouchableOpacity style={styles.btnAgendar} onPress={()=>navigation.navigate('Agenda tu cita')}>
           <Text style={{fontWeight: 'bold', fontSize: 18}}>
             Agendar Cita
           </Text>
